@@ -14,22 +14,22 @@
 	
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">eventGet</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/}" href="#">Inicio</a>
+                    <a class="nav-link" href="#">Perfil</a>
+                    <a class="nav-link" href="#">Publicaciones</a>
                     <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- jump Botron-->
+    <!-- jumbotron-->
         
   <div class="jumbotron">
    <h1 class="display-4">Hello, world!</h1>
@@ -38,6 +38,54 @@
    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
  </div>
-
+<!--Cards-->
+        
+        
+<div  class="container">
+        <div class="row 12"><!-- centra en el medio -->
+        
+            <div th:each="post: ${posts}" class="col-3"><!-- for para los post desde thymeleaf -->
+                <div class="card" style="width: 18rem;">
+                    <img th:src="${post.urlImg}"  src="../static/img/eventGet.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 th:text="${post.titulo}" class="card-title">Card title 1 </h5><!-- coloca como titulo el valor de la variable que fues pasada como parametro en controllerBasic -->
+                        <p th:text="${post.descrip}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>                                
+            </div>
+	      
+     
+        </div>
+    
+    <!--pagination-->
+      <div class="row">
+            <div class="col-12">
+                
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center "->
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+            </div>
+        </div>
+     </div>
+    
+    
+    </div>      
+        
 	</body>
 </html>
