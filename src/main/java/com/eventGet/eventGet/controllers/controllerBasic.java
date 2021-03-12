@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.eventGet.eventGet.configuration.Paginas;
 import com.eventGet.eventGet.model.Post;
 
-@Controller
+@Controller 
 @RequestMapping("/home")
 public class controllerBasic {
 	
@@ -34,14 +34,14 @@ public class controllerBasic {
 		return "index";
 	}
 
-	@GetMapping (path="/public")
+	/*@GetMapping (path="/public")
 	public ModelAndView post() {
 		ModelAndView modelAndView = new ModelAndView(Paginas.HOME);//una forma de escribir la url en el navegador
 		
 		modelAndView.addObject("posts",this.getPosts());
 		return modelAndView;
 		
-	}
+	}*/
 	
 	@GetMapping(path = {"/post"})//CoV11
 	public ModelAndView getPostIndividual(@RequestParam(defaultValue = "1", name="id", required = false)int id) {
