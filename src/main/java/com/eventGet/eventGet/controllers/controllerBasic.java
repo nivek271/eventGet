@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,8 +44,9 @@ public class controllerBasic {
 		
 	}*/
 	
-	@GetMapping(path = {"/post"})//CoV11
-	public ModelAndView getPostIndividual(@RequestParam(defaultValue = "1", name="id", required = false)int id) {
+	@GetMapping(path = {"/post","/post/pub/{post}"})//CoV11 - 12 //entre {} para mostrar el nro de id//2 formas de ingresar home/post o home/post/pub/nroId
+	public ModelAndView getPostIndividual(
+			@RequestParam(defaultValue = "1", name="id", required = false)			@PathVariable (required = true, name = "post")int id) {//en la url aparesca el numero de publicacione(id)
 		ModelAndView modelAndView = new ModelAndView(Paginas.POST);
 		List<Post> postFiltrado = this.getPosts().stream().filter( (p) -> { return p.getId () == id; }).collect(Collectors.toList());
 		
