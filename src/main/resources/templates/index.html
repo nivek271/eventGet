@@ -50,7 +50,7 @@
                     <div class="card-body">
                         <h5 th:text="${post.titulo}" class="card-title">Card title 1 </h5><!-- coloca como titulo el valor de la variable que fues pasada como parametro en controllerBasic -->
                         <p th:text="${post.descrip}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a th:href="@{/home/post?id=} + ${post.id}" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>                                
             </div>
@@ -85,7 +85,10 @@
      </div>
     
     
-    </div>      
-        
-	</body>
+     </div>      
+   
+  </body>
+  <footer>
+   		<p> eventGet </p>
+   </footer>
 </html>
