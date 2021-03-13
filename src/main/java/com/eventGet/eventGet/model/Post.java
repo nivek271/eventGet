@@ -5,13 +5,13 @@ import java.util.Date;
 public class Post {
 	private int id;
 	private String descrip;
-	private String urlImg;
-	private Date fecha;
+	private String urlImg = "http://localhost:8181/img/eventGet.png";
+	private Date fecha = new Date();
 	private String titulo;
 	
 	
 	
-	
+	 
 	
 	
 	public Post(int id, String descrip, String urlImg, Date fecha, String titulo) {
