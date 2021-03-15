@@ -1,10 +1,10 @@
 package com.eventGet.eventGet.controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.eventGet.eventGet.components.PostComponent;
 import com.eventGet.eventGet.configuration.Paginas;
 import com.eventGet.eventGet.model.Post;
 
@@ -21,18 +22,12 @@ import com.eventGet.eventGet.model.Post;
 @RequestMapping("/home")
 public class ControllerBasic {
 	
-	public List<Post> getPosts(){//creo una arrayList de tipo Post
-		ArrayList<Post> post = new ArrayList<>();
-		post.add(new Post(1,"prueba de descripcion en creacion de eventos","http://localhost:8181/img/eventGet.png"	, new Date(),"evento creado" ));
-		post.add(new Post(2,"prueba de descripcion en creacion de eventos","http://localhost:8181/img/fondo.jpg"	, new Date(),"evento creado 2" ));
-		post.add(new Post(3,"prueba de descripcion en creacion de eventos","http://localhost:8181/img/eventGet.png"	, new Date(),"evento creado 3" ));
-		
-		return post;
-	}
+	@Autowired
+	private  PostComponent _postComponent;
 	
 	@GetMapping (path = {"/posts","/"})
 	public String saludar(Model model) {
-		model.addAttribute("posts",this.getPosts());
+		model.addAttribute("posts",this._postComponent.getPosts());
 		return "index";
 	}
 
@@ -49,7 +44,7 @@ public class ControllerBasic {
 	public ModelAndView getPostIndividual(
 			@RequestParam(defaultValue = "1", name="id", required = false)			@PathVariable (required = true, name = "post")int id) {//en la url aparesca el numero de publicacione(id)
 		ModelAndView modelAndView = new ModelAndView(Paginas.POST);
-		List<Post> postFiltrado = this.getPosts().stream().filter( (p) -> { return p.getId () == id; }).collect(Collectors.toList());
+		List<Post> postFiltrado = this._postComponent.getPosts().stream().filter( (p) -> { return p.getId () == id; }).collect(Collectors.toList());
 		
 		modelAndView.addObject("post",postFiltrado.get(0));
 		
@@ -64,7 +59,7 @@ public class ControllerBasic {
 	
 	@PostMapping ("/addNewPost")
 	public String addNewPost(Post post, Model model) {
-		List<Post> posts=this.getPosts();
+		List<Post> posts=this._postComponent.getPosts();
 		posts.add(post);
 		model.addAttribute("posts",posts);
 		return "index";
